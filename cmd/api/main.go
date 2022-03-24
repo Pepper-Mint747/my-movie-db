@@ -32,19 +32,15 @@ func main() {
 	// Initialize a new logger which writes messages to the standard output stream prefixed with current date and time
 	logger := log.New(os.Stdout, "", log.Ldate|log.Ltime)
 
-	// Declare instance of the application struct containing the config struct and the logger
 	app := &application{
 		config: cfg,
 		logger: logger,
 	}
 
-	mux := http.NewServeMux()
-	mux.HandleFunc("/v1/healthcheck", app.healthcheckHandler)
-
 	// Server declaration
 	srv := &http.Server{
 		Addr:         fmt.Sprintf(":%d", cfg.port),
-		Handler:      mux,
+		Handler:      app.routes(),
 		IdleTimeout:  time.Minute,
 		ReadTimeout:  time.Second,
 		WriteTimeout: time.Second,
