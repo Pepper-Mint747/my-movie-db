@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-// @desc createMovieHandler
+// createMovieHandler
 // @desc    POST a single movie
 //@route    POST /v1/movies
 //@access   Public
